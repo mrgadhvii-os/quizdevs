@@ -1,0 +1,94 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MrGadhvii Quiz Extractor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo-container">
+                <h1 class="logo">Mr<span>Gadhvii</span></h1>
+                <div class="logo-tag">Quiz Extractor</div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="input-section">
+                <div class="card animated-card">
+                    <h2><i class="fas fa-link"></i> Enter Google Form URL</h2>
+                    <div class="input-container">
+                        <input type="text" id="quiz-url" placeholder="Paste your Google Form quiz URL here...">
+                        <button id="extract-btn" class="btn primary-btn">
+                            <span class="btn-text">Extract Quiz</span>
+                            <div class="loader"></div>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="questions-section" id="questions-section" style="display: none;">
+                <div class="card animated-card">
+                    <h2><i class="fas fa-question-circle"></i> Extracted Questions</h2>
+                    <div id="questions-container"></div>
+                    <button id="get-answers-btn" class="btn secondary-btn">
+                        <span class="btn-text">Get Answers from AI</span>
+                        <div class="loader"></div>
+                    </button>
+                </div>
+            </section>
+
+            <section class="answers-section" id="answers-section" style="display: none;">
+                <div class="card animated-card">
+                    <h2><i class="fas fa-robot"></i> AI Generated Answers</h2>
+                    <div id="answers-container" class="answers-container"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="server-status-container">
+                <h3><i class="fas fa-server"></i> Server Status</h3>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="status-label">Status:</span>
+                        <span class="status-value" id="status-value">
+                            <span class="status-indicator {{ 'online' if server_status.status == 'Running' else 'offline' }}"></span>
+                            {{ server_status.status }}
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">System:</span>
+                        <span class="status-value">{{ server_status.system }}</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Python:</span>
+                        <span class="status-value">{{ server_status.python_version }}</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">CPU:</span>
+                        <span class="status-value">{{ server_status.cpu_usage }}</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Memory:</span>
+                        <span class="status-value">{{ server_status.memory_usage }}</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Uptime:</span>
+                        <span class="status-value">{{ server_status.uptime }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 MrGadhvii. All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
